@@ -15,7 +15,7 @@ st.set_page_config(
 ADMIN_PASSWORD = "nopal123"
 CSV_PATH       = "UPDATE PERJUMLAH IPOS 5.xlsx - Sheet.csv"
 LOGO_PATH      = "logo.jpg"
-WA_NUMBER      = "6285373373233"  # ← Ganti nomor WhatsApp admin
+WA_NUMBER      = "6285373373233"  
 
 CATEGORY_ICONS = {
     "MIE INSTANT":"🍜","MIE CUP":"🍜","MIE OLAH":"🍜",
@@ -318,10 +318,11 @@ def build_card(kode, nama, jenis, group_df):
 if "cat" not in st.session_state:
     st.session_state.cat = "Semua"
 
-# Read category from query params (set by JS chip click)
+# Read category AND keyword from query params (set by JS chip click)
 qp = st.query_params
 if "cat" in qp:
     st.session_state.cat = qp["cat"]
+default_kw = qp.get("q", "")   # ← preserve search keyword across chip clicks
 
 
 # ══════════════════════════════════════════════════════════════
@@ -377,7 +378,12 @@ if df.empty:
 # ══════════════════════════════════════════════════════════════
 # SEARCH
 # ══════════════════════════════════════════════════════════════
-keyword = st.text_input("🔍 Cari Barang", placeholder="Ketik nama barang… contoh: mie, gula, sabun")
+keyword = st.text_input(
+    "🔍 Cari Barang",
+    value=default_kw,          # ← restore keyword setelah chip click (page reload)
+    placeholder="Ketik nama barang… contoh: mie, gula, sabun",
+    key="kw",                  # ← key stabil agar state tidak hilang saat rerun / Enter
+)
 
 
 # ══════════════════════════════════════════════════════════════
@@ -408,9 +414,28 @@ st.html(f"""
 
 <script>
 function selectCat(cat) {{
-  // Update URL query param then reload — Streamlit picks it up
   const url = new URL(window.location.href);
   url.searchParams.set('cat', cat);
+
+  // ── Baca nilai search dari parent Streamlit dan ikutkan ke URL ──
+  var searchVal = '';
+  try {{
+    var inputs = window.parent.document.querySelectorAll('input[type="text"]');
+    for (var i = 0; i < inputs.length; i++) {{
+      var ph = inputs[i].placeholder || '';
+      if (ph.indexOf('nama barang') !== -1 || ph.indexOf('Ketik') !== -1) {{
+        searchVal = inputs[i].value || '';
+        break;
+      }}
+    }}
+  }} catch(e) {{}}
+
+  if (searchVal.trim()) {{
+    url.searchParams.set('q', searchVal.trim());
+  }} else {{
+    url.searchParams.delete('q');
+  }}
+
   window.location.href = url.toString();
 }}
 
