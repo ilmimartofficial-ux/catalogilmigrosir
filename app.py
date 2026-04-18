@@ -292,20 +292,16 @@ def wa_link(name):
 def load_data(path):
     df = pd.read_csv(path)
     
-    # ── PERBAIKAN: Membersihkan format harga sebelum dijadikan angka ──
-    # Kolom yang perlu dibersihkan dari format Excel (Rp, titik ribuan, spasi)
     price_cols = ["Harga Retail", "Harga Grosir", "Harga Pokok"]
     
     for col in price_cols:
-        # 1. Ubah jadi string dulu agar aman
+        
         df[col] = df[col].astype(str)
-        # 2. Hapus 'Rp' (huruf besar/kecil), hapus titik (.), dan hapus spasi
         df[col] = df[col].str.replace('Rp', '', case=False, regex=False)
         df[col] = df[col].str.replace('.', '', regex=False) 
+        df[col] = df[col].str.replace(',', '', regex=False)  
         df[col] = df[col].str.replace(' ', '', regex=False)
-        # 3. Baru ubah jadi angka numeric
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
-    # ───────────────────────────────────────────────────────────────────
 
     df["Konversi"] = pd.to_numeric(df["Konversi"], errors="coerce").fillna(1)
     
