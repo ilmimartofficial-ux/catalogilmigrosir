@@ -15,7 +15,7 @@ st.set_page_config(
 ADMIN_PASSWORD = "nopal123"
 CSV_PATH       = "UPDATE PERJUMLAH IPOS 5.xlsx - Sheet.csv"
 LOGO_PATH      = "logo.jpg"
-WA_NUMBER      = "6282278891186"  # Ganti nomor WA Anda di sini
+WA_NUMBER      = "6282278891186"
 
 CATEGORY_ICONS = {
     "MIE INSTANT":"🍜","MIE CUP":"🍜","MIE OLAH":"🍜",
@@ -47,7 +47,7 @@ CATEGORY_ICONS = {
 def cat_icon(j): return CATEGORY_ICONS.get(j.upper(), "📦")
 
 # ══════════════════════════════════════════════════════════════
-# CSS STYLING (Termasuk Styling st.radio menjadi Chips)
+# CSS STYLING
 # ══════════════════════════════════════════════════════════════
 st.markdown("""
 <style>
@@ -104,7 +104,7 @@ html,body,[class*="css"]{
     font-family:'Plus Jakarta Sans',sans-serif !important;
 }
 
-/* CHIPS via st.radio — NATIVE STREAMLIT WIDGET */
+/* CHIPS via st.radio */
 div[data-testid="stRadio"]{
     background:#fff !important;
     padding:0 0 10px 0 !important;
@@ -114,7 +114,7 @@ div[data-testid="stRadio"]{
 div[data-testid="stRadio"] > label{
     display:none !important;
 }
-/* Row chip: horizontal scroll tanpa wrap */
+/* Row chip: horizontal scroll */
 div[data-testid="stRadio"] div[role="radiogroup"]{
     display:flex !important;
     flex-wrap:nowrap !important;
@@ -162,7 +162,7 @@ div[data-testid="stRadio"] div[role="radiogroup"] > label:has(input[type="radio"
     color:#fff !important;
     box-shadow:0 4px 14px rgba(13,36,97,.3) !important;
 }
-/* Sembunyikan radio circle bawaan */
+/* Sembunyikan radio circle */
 div[data-testid="stRadio"] div[role="radiogroup"] > label > div:first-child{
     display:none !important;
 }
@@ -411,19 +411,16 @@ keyword = st.text_input(
 
 
 # ══════════════════════════════════════════════════════════════
-# CATEGORY CHIPS — st.radio NATIVE (PERBAIKAN UTAMA)
+# CATEGORY CHIPS — st.radio NATIVE
 # ══════════════════════════════════════════════════════════════
 cat_list    = ["Semua"] + all_cats
 cat_display = ["🛒 Semua"] + [f"{cat_icon(c)} {c}" for c in all_cats]
 
-# Header label chip (HTML statik)
 st.markdown(
     '<div class="chips-header"><span class="chips-label">📂 Pilih Kategori</span></div>',
     unsafe_allow_html=True,
 )
 
-# Widget Radio Horizontal untuk Kategori
-# Ini 100% merespon karena adalah widget native Streamlit
 chosen_display = st.radio(
     "Pilih Kategori",
     options=cat_display,
@@ -432,7 +429,6 @@ chosen_display = st.radio(
     key="cat_radio",
 )
 
-# Petakan label tampilan → nama kategori asli
 chosen_idx = cat_display.index(chosen_display)
 selected   = cat_list[chosen_idx]
 
@@ -442,19 +438,16 @@ selected   = cat_list[chosen_idx]
 # ══════════════════════════════════════════════════════════════
 filtered = df.copy()
 
-# 1. Filter kategori
 if selected != "Semua":
     mask     = df["Jenis"].str.strip().str.lower() == selected.strip().lower()
     filtered = filtered[mask]
 
-# 2. Filter keyword
 kw = keyword.strip()
 if kw:
     filtered = filtered[
         filtered["Nama Item"].str.contains(kw, case=False, na=False)
     ]
 
-# 3. Kelompokkan per produk unik
 groups          = filtered.groupby(["Kode Item", "Nama Item", "Jenis"], sort=False)
 unique_products = list(groups)
 n               = len(unique_products)
