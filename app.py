@@ -526,5 +526,5 @@ st.html
 <div class="app-footer">
   <div class="footer-brand">ILMIGROSIR</div>
   <div class="footer-tagline">Jual Lagi, Untung Kembali</div>
-  <div class="footer-dev">Developed with ❤️ by <span>NOPAL TECH</span></div>
+  <div class="footer-dev">Developed with  by <span>NOPAL TECH</span></div>
 </div>
