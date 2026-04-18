@@ -15,7 +15,7 @@ st.set_page_config(
 ADMIN_PASSWORD = "nopal123"
 CSV_PATH       = "UPDATE PERJUMLAH IPOS 5.xlsx - Sheet.csv"
 LOGO_PATH      = "logo.jpg"
-WA_NUMBER      = "6282278891186"
+WA_NUMBER      = "6285373373233"
 
 CATEGORY_ICONS = {
     "MIE INSTANT":"🍜","MIE CUP":"🍜","MIE OLAH":"🍜",
