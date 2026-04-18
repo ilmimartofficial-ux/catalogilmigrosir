@@ -376,8 +376,8 @@ logo_tag  = (
 st.html(f"""
 <div class="hero">
   {logo_tag}
-  <div class="hero-tagline">✦ Katalog Harga Publik ✦</div>
-  <div class="hero-sub">Jual Lagi, Untung Kembali</div>
+  <div class="hero-tagline">✦ CATALOG HARGA ILMIGROSIR ✦</div>
+  <div class="hero-sub">HARGA GROSIR BERLAKU BILA PEMBELIAN DI ATAS 3</div>
 </div>
 <div class="stats-bar">
   <div class="stat-item">
