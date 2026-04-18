@@ -1,12 +1,3 @@
-Masalah "tombol kategori tidak merespon" terjadi karena **JavaScript (`window.parent.location`)** diblokir oleh browser saat aplikasi Streamlit berjalan di dalam **iframe** (seperti di Streamlit Cloud atau share link). Browser memblokir akses JS dari dalam iframe ke URL induk untuk alasan keamanan.
-
-Solusinya adalah **menghapus JavaScript** sepenuhnya dan menggantinya dengan **Widget Native Streamlit (`st.radio`)** yang sudah Anda siapkan di bagian kedua kode, namun perlu dirapikan agar berjalan lancar.
-
-Berikut adalah kode lengkap yang sudah diperbaiki. Kode ini menggunakan `st.radio` dengan CSS khusus agar terlihat seperti "Chips" (tombol bulat) yang bisa di-scroll horizontal, dan pasti merespon 100% karena tidak menggunakan JS.
-
-Silakan copy-paste seluruh kode di bawah ini ke `app.py`:
-
-```python
 import streamlit as st
 import pandas as pd
 import base64, os, urllib.parse
