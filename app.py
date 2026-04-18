@@ -528,5 +528,4 @@ st.html("""
   <div class="footer-tagline">Jual Lagi, Untung Kembali</div>
   <div class="footer-dev">Developed with ❤️ by <span>NOPAL TECH</span></div>
 </div>
-""")
-```
+
