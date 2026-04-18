@@ -526,6 +526,6 @@ st.html("""
 <div class="app-footer">
   <div class="footer-brand">ILMIGROSIR</div>
   <div class="footer-tagline">Jual Lagi, Untung Kembali</div>
-  <div class="footer-dev">Developed<span>NAUFAL MUZAQI</span></div>
+  <div class="footer-dev">Developed By <span>NAUFAL MUZAQI</span></div>
 </div>
 """)
