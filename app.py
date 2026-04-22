@@ -763,7 +763,7 @@ elif page == "catalog":
 <div class="search-wrap">
 """, unsafe_allow_html=True)
 
-    keyword = st.text_input("Cari", placeholder="&#128269; Cari nama barang… (mie, gula, kopi)", key="kw")
+    keyword = st.text_input("Cari", placeholder="🔍Cari nama barang… (mie, gula, kopi)", key="kw")
 
     st.markdown("</div>", unsafe_allow_html=True)
 
