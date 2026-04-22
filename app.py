@@ -625,11 +625,6 @@ st.markdown(f"""
 # ══════════════════════════════════════════════════════════════
 # TOMBOL KEMBALI — hanya di halaman selain beranda
 # ══════════════════════════════════════════════════════════════
-if page != "home":
-    st.markdown(
-        '<a class="back-btn" href="?page=home" title="Kembali ke Beranda">&#8592;</a>',
-        unsafe_allow_html=True
-    )
 
 
 # ══════════════════════════════════════════════════════════════
